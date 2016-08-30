@@ -13,14 +13,14 @@ A convolution operation is accelerated in C and JIT, rather than a lua handwritt
 The scale of the "lena" image is reduced in single side (either height or width) while the number of pixels along another edge is fixed. The comparison result is shown below.
 
 **Time Consumption List by the (scale down ratio) in hight**
- |scale down ratio|image scale|lua|jit|C|torch.conv2|
- |-----|-----|-----|-----|-----|-----|
- |1|512*512|2.693 s|0.226 s|0.264 s|0.0442 s|
- |2|256*512|1.332 s|0.108 s|0.130 s|0.0103 s|
- |3|128*512|0.742 s|0.0556 s|0.0603 s|0.00367 s|
- |4|64*512|0.510 s|0.0187 s|0.0374 s|0.00175 s| 
- |5|32*512|0.2534 s|0.0138 s|0.00548 s|8.029e-4 s|
- |6|16*512|0.0716 s|0.00170 s|0.00884 s|2.591e-4|
+|scale down ratio|image scale|lua|jit|C|torch.conv2|
+|-----|-----|-----|-----|-----|-----|
+|1|512*512|2.693 s|0.226 s|0.264 s|0.0442 s|
+|2|256*512|1.332 s|0.108 s|0.130 s|0.0103 s|
+|3|128*512|0.742 s|0.0556 s|0.0603 s|0.00367 s|
+|4|64*512|0.510 s|0.0187 s|0.0374 s|0.00175 s| 
+|5|32*512|0.2534 s|0.0138 s|0.00548 s|8.029e-4 s|
+|6|16*512|0.0716 s|0.00170 s|0.00884 s|2.591e-4|
 
 #### => **Reduce height scale of 4 approaches and compare time consumption**
 ![](https://purdue0-my.sharepoint.com/personal/han424_purdue_edu/_layouts/15/guestaccess.aspx?guestaccesstoken=msRJKvz5kXxt57iM%2bLob%2bfxkTQKeItvpohGtMRK%2bl%2fE%3d&docid=06c814fdc223f434e844612305aaa7339&rev=1)
@@ -32,14 +32,14 @@ To get the comparison more clearly, we remove the line of lua computation becaus
 We can see that for each approach, time consumption is almost linear to the pixel number along height when the number of pixels along width is fixed.
 
 **Time Consumption List by the (scale down ratio) in width**
- |scale down ratio|image scale|lua|jit|C|torch.conv2|
+|scale down ratio|image scale|lua|jit|C|torch.conv2|
 |-----|-----|-----|-----|-----|-----|
- |1|512*512|2.598 s|0.236 s|0.257 s|0.0374 s|
- |2|512*256|1.315 s|0.109 s|0.127 s|0.0192 s|
- |3|512*128|0.751 s|0.0573 s|0.0624 s|0.00425 s|
- |4|512*64|0.535 s|0.0189 s|0.0375 s|0.00210 s| 
- |5|512*32|0.2492 s|0.0125 s|0.0198 s|0.00120 s|
- |6|512*16|0.109 s|0.00169 s|0.00208 s|4.53e-4|
+|1|512*512|2.598 s|0.236 s|0.257 s|0.0374 s|
+|2|512*256|1.315 s|0.109 s|0.127 s|0.0192 s|
+|3|512*128|0.751 s|0.0573 s|0.0624 s|0.00425 s|
+|4|512*64|0.535 s|0.0189 s|0.0375 s|0.00210 s| 
+|5|512*32|0.2492 s|0.0125 s|0.0198 s|0.00120 s|
+|6|512*16|0.109 s|0.00169 s|0.00208 s|4.53e-4|
 
 #### => **Reduce width scale of 4 approaches and compare time consumption**
 ![](https://purdue0-my.sharepoint.com/personal/han424_purdue_edu/_layouts/15/guestaccess.aspx?guestaccesstoken=rQvfCLxEp8qyX8VRjyOfmbt7BUy%2bGWLx3LHEOJgwRv0%3d&docid=02b716c189ad947f08a075ad6ea53466b&rev=1)
