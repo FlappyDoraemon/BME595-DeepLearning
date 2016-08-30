@@ -34,6 +34,7 @@ To get the comparison more clearly, we remove the line of lua computation becaus
 We can see that for each approach, time consumption is almost linear to the pixel number along height when the number of pixels along width is fixed.
 
 **Time Consumption List by the (scale down ratio) in width**
+
 |scale down ratio|image scale|lua|jit|C|torch.conv2|
 |-----|-----|-----|-----|-----|-----|
 |1|512*512|2.598 s|0.236 s|0.257 s|0.0374 s|
