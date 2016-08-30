@@ -16,19 +16,12 @@ The scale of the "lena" image is reduced in single side (either height or width)
 
 
 |scale down ratio|image scale|lua|jit|C|torch.conv2|
-
 |-----|-----|-----|-----|-----|-----|
-
 |1|512*512|2.693 s|0.226 s|0.264 s|0.0442 s|
-
 |2|256*512|1.332 s|0.108 s|0.130 s|0.0103 s|
-
 |3|128*512|0.742 s|0.0556 s|0.0603 s|0.00367 s|
-
 |4|64*512|0.510 s|0.0187 s|0.0374 s|0.00175 s| 
-
 |5|32*512|0.2534 s|0.0138 s|0.00548 s|8.029e-4 s|
-
 |6|16*512|0.0716 s|0.00170 s|0.00884 s|2.591e-4|
 
 #### => **Reduce height scale of 4 approaches and compare time consumption**
