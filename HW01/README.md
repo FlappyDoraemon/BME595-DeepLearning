@@ -13,6 +13,8 @@ A convolution operation is accelerated in C and JIT, rather than a lua handwritt
 The scale of the "lena" image is reduced in single side (either height or width) while the number of pixels along another edge is fixed. The comparison result is shown below.
 
 **Time Consumption List by the (scale down ratio) in hight**
+
+
 |scale down ratio|image scale|lua|jit|C|torch.conv2|
 
 |-----|-----|-----|-----|-----|-----|
