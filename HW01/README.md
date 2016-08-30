@@ -14,7 +14,7 @@ The scale of the "lena" image is reduced in single side (either height or width)
 
 **Time Consumption List by the (scale down ratio) in hight**
  |scale down ratio|image scale|lua|jit|C|torch.conv2|
- |:---:|:---:|:---:|:---:|:---:|:---:|
+ |-----|-----|-----|-----|-----|-----|
  |1|512*512|2.693 s|0.226 s|0.264 s|0.0442 s|
  |2|256*512|1.332 s|0.108 s|0.130 s|0.0103 s|
  |3|128*512|0.742 s|0.0556 s|0.0603 s|0.00367 s|
@@ -33,7 +33,7 @@ We can see that for each approach, time consumption is almost linear to the pixe
 
 **Time Consumption List by the (scale down ratio) in width**
  |scale down ratio|image scale|lua|jit|C|torch.conv2|
- |:---:|:---:|:---:|:---:|:---:|:---:|
+|-----|-----|-----|-----|-----|-----|
  |1|512*512|2.598 s|0.236 s|0.257 s|0.0374 s|
  |2|512*256|1.315 s|0.109 s|0.127 s|0.0192 s|
  |3|512*128|0.751 s|0.0573 s|0.0624 s|0.00425 s|
@@ -53,7 +53,7 @@ Also the computation efficiency of jit method and C method are almost the same, 
 >
 The program computes the convolution from 1 to 15 times respectively to reduce random and record both the total time consumption and the average.  
 #### => **Total time consumption for 4 different ways**
-![](https://purdue0-my.sharepoint.com/personal/han424_purdue_edu/Documents/Semester_1_1/BME595/week_0/HW1/total_4.png)
+![](https://purdue0-my.sharepoint.com/personal/han424_purdue_edu/_layouts/15/guestaccess.aspx?guestaccesstoken=IQre3H%2fzWTpnSGjC56KsAfD3B0hKNV%2fTQA%2b4VXheViA%3d&docid=0e8ba33e2cf8142448e5788381c488c11&rev=1)
 
 Time consumed is linear to iteration times for each approach. Since Lua manually described approach consumes too much time and we can not view detail of others in a same view, let's remove lua line and compare.
 #### => Total time consumption of 3 different ways except the baseline
