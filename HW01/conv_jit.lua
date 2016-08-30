@@ -3,8 +3,9 @@ require 'nn'
 require 'optim'
 require 'image'
 require 'paths'
+local conv_jit={}
 
-function jit_conv(x , k)
+function conv_jit.jit_conv(x , k)
     local height , width = x:size(1) , x:size(2)
     local kernel_height , kernel_width = k:size(1) , k:size(2)
     local th_result = torch.zeros(height - kernel_height + 1 , width - kernel_width + 1)
@@ -46,3 +47,5 @@ function jit_conv(x , k)
     end
     return th_result
 end
+
+return conv_jit

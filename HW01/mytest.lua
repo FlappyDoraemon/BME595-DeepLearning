@@ -4,8 +4,8 @@ require 'optim'
 require 'image'
 require 'gnuplot'
 require 'paths'
-require 'conv'
-require 'conv_jit'
+local convjit=require 'conv_jit'
+local conv=require 'conv'
 
 local looptimes
 local maxlooptime = 15
@@ -26,9 +26,9 @@ image.display(mylena_r)
 local warmup_iter
 for warmup_iter = 1 , 2 do
     standard_result = torch.conv2(mylena_r, kernel)
-    lua_result = lua_conv(mylena_r, kernel)
-    jit_result = jit_conv(mylena_r, kernel)
-    c_result = C_conv(mylena_r, kernel)
+    lua_result = conv.Lua_conv(mylena_r, kernel)
+    jit_result = convjit.jit_conv(mylena_r, kernel)
+    c_result = conv.C_conv(mylena_r, kernel)
 end
 
 
@@ -40,15 +40,15 @@ for i = 1 , scale_num do
     local img_temp = mylena_r[{{1,this_height},{}}]
     --  lua
     timer:reset()
-    lua_result = lua_conv(img_temp, kernel)
+    lua_result = conv.Lua_conv(img_temp, kernel)
     height_record[{1,i}] = timer:time().real
     --  jit
     timer:reset()
-    jit_result = jit_conv(img_temp, kernel)
+    jit_result = convjit.jit_conv(img_temp, kernel)
     height_record[{2,i}] = timer:time().real
     --  C
     timer:reset()
-    c_result = C_conv(img_temp, kernel)
+    c_result = conv.C_conv(img_temp, kernel)
     height_record[{3,i}] = timer:time().real
     --  torch.conv2
     timer:reset()
@@ -66,15 +66,15 @@ for i = 1 , scale_num do
     local img_temp = mylena_r[{{},{1,this_width}}]
     --  lua
     timer:reset()
-    lua_result = lua_conv(img_temp, kernel)
+    lua_result = conv.Lua_conv(img_temp, kernel)
     width_record[{1,i}] = timer:time().real
     --  jit
     timer:reset()
-    jit_result = jit_conv(img_temp, kernel)
+    jit_result = convjit.jit_conv(img_temp, kernel)
     width_record[{2,i}] = timer:time().real
     --  C
     timer:reset()
-    c_result = C_conv(img_temp, kernel)
+    c_result = conv.C_conv(img_temp, kernel)
     width_record[{3,i}] = timer:time().real
     --  torch.conv2
     timer:reset()
@@ -126,7 +126,7 @@ for looptimes = 1, maxlooptime do
     --  lua test
     timer:reset()
     for i = 1 , looptimes do
-        lua_result = lua_conv(mylena_r, kernel)
+        lua_result = conv.Lua_conv(mylena_r, kernel)
     end
     lua_time = timer:time().real
     total_record[{2,looptimes}] = lua_time     
@@ -134,7 +134,7 @@ for looptimes = 1, maxlooptime do
     --  jit test
     timer:reset()
     for i = 1 , looptimes do
-        jit_result = jit_conv(mylena_r, kernel)
+        jit_result = convjit.jit_conv(mylena_r, kernel)
     end
     jit_time = timer:time().real
     total_record[{3,looptimes}] = jit_time     
@@ -142,7 +142,7 @@ for looptimes = 1, maxlooptime do
     --  C test
     timer:reset()
     for i = 1 , looptimes do
-        c_result = C_conv(mylena_r, kernel)
+        c_result = conv.C_conv(mylena_r, kernel)
     end    
     c_time = timer:time().real
     total_record[{4,looptimes}] = c_time     

@@ -3,8 +3,9 @@ require 'nn'
 require 'optim'
 require 'image'
 require 'paths'
+local conv={}
 
-function lua_conv(x , k)
+function conv.Lua_conv(x , k)
     local height , width = x:size(1) , x:size(2)
     local kernel_height , kernel_width = k:size(1) , k:size(2)
     local th_result = torch.zeros(height - kernel_height + 1 , width - kernel_width + 1)
@@ -27,7 +28,7 @@ function lua_conv(x , k)
     return th_result
 end
 
-function C_conv(x , k)
+function conv.C_conv(x , k)
     local height , width = x:size(1) , x:size(2)
     local kernel_height , kernel_width = k:size(1) , k:size(2)
     local c_result = torch.zeros(height - kernel_height + 1 , width - kernel_width + 1)
@@ -50,3 +51,5 @@ function C_conv(x , k)
     mylib.c_convo(torch.data(x) , torch.data(kernel) , torch.data(c_result) , height , width , kernel_height , kernel_width)
     return c_result
 end
+
+return conv
