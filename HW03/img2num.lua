@@ -18,11 +18,11 @@ function img2num.train()
     --  local testset = mnist.testdataset()
     local i
     local j
-    local batch_size = 10
+    local batch_size = 20
     print('batch_size = ',batch_size)
-    for i = 1 , 1000 do --trainset.size do
+    for i = 1 , 500 do --trainset.size do
         --if i % 100 == 0 then
-        print('training the sample of ',i,'of all','100 training batches')
+        print('training the sample of ',i,'of all','500 training batches')
         local ex = trainset[(i-1)*batch_size+1]
         local x = nn.Reshape(784):forward(ex.x:double()) -- the input (a 28x28 ByteTensor)
         local y = ex.y -- the label (0--9)
@@ -36,7 +36,7 @@ function img2num.train()
             target_2[{y+1}] = 1       --  0=>1,1=>2,2=>3,3=>4,4=>5
             target = torch.cat(target , target_2 , 2)
         end
-        NeuralNetworkLib.forward(torch.cat(torch.ones(1,10) , x , 1))
+        NeuralNetworkLib.forward(torch.cat(torch.ones(1,batch_size) , x , 1))
         NeuralNetworkLib.backward(target)
         NeuralNetworkLib.updateParams(0.05)
     end

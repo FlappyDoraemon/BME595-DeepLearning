@@ -8,7 +8,7 @@ require 'nn'
 -- PART 1 : MNIST TEST
 ----------------------------------------------------------------------
 
---[[
+
 
 --  test with minist dataset
 img2numLib.train()
@@ -30,7 +30,7 @@ for i = 1 , 100 do
 end
 print('accuracy rate after training the whole train-set:',mark,'%')
 
---]]
+
    
 
 ----------------------------------------------------------------------
@@ -71,7 +71,7 @@ print(temp_forward)
 ----------------------------------------------------------------------
 
 
-
+--[[
 logicGatesLib.AND.train()
 print('AND result:')
 print('false and false should be 0: ',logicGatesLib.AND.forward(false, false))
@@ -115,6 +115,6 @@ print('train 1:',NeuralNetworkLib.getLayer(1)  )
 print('train 2:',NeuralNetworkLib.getLayer(2)  )
 logicGatesLib.XOR.set()
 print('true and false should be 1. calculated be setted w parameters: ',logicGatesLib.XOR.forward(true, false))
-
+--]]
 
 
