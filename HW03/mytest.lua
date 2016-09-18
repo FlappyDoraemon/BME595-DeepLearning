@@ -4,6 +4,12 @@ local mnist = require 'mnist'
 local img2numLib = require 'img2num'
 require 'nn'
 
+----------------------------------------------------------------------
+-- PART 1 : MNIST TEST
+----------------------------------------------------------------------
+
+--[[
+
 --  test with minist dataset
 img2numLib.train()
 --  local trainset = mnist.traindataset()
@@ -22,13 +28,19 @@ for i = 1 , 100 do
         mark = mark + 1
     end
 end
-print('accuracy rate after training the whole train-set for a time:',mark,'%')
+print('accuracy rate after training the whole train-set:',mark,'%')
 
+--]]
+   
 
---  test with the tutorial case
---  test only for batch train (non-batch case tested in logic module)
+----------------------------------------------------------------------
+-- PART 2 : WEBSITE EXAMPLE TEST
+--          ONLY USE BATCH MODE
+--          https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/    
+----------------------------------------------------------------------
 
 --[[
+
 NeuralNetworkLib.build({2,2,2})
 local layer_temp
 local setvalue
@@ -51,45 +63,58 @@ for i = 1 , 100000 do
 end
 temp_forward = NeuralNetworkLib.forward(in_test)
 print(temp_forward)
+
 --]]
 
---  test with logic gates
+----------------------------------------------------------------------
+-- PART 3 : LOGIC GATES TEST
+----------------------------------------------------------------------
 
---[[
+
+
 logicGatesLib.AND.train()
-print('and result:')
+print('AND result:')
 print('false and false should be 0: ',logicGatesLib.AND.forward(false, false))
 print('false and true should be 0: ',logicGatesLib.AND.forward(false, true))
 print('true and false should be 0: ',logicGatesLib.AND.forward(true, false))
 print('true and true should be 1: ',logicGatesLib.AND.forward(true, true))
+print('train 1:',NeuralNetworkLib.getLayer(1)  )
+print('train 2:',NeuralNetworkLib.getLayer(2)  )
 logicGatesLib.AND.set()
+print('test 1:',NeuralNetworkLib.getLayer(1)  )
 print('true and false should be 0. calculated be setted w parameters: ',logicGatesLib.AND.forward(true, false))
 
 logicGatesLib.OR.train()
-print('or result:')
+print('OR result:')
 print('false and false should be 0: ',logicGatesLib.OR.forward(false, false))
 print('false and true should be 1: ',logicGatesLib.OR.forward(false, true))
 print('true and false should be 1: ',logicGatesLib.OR.forward(true, false))
 print('true and true should be 1: ',logicGatesLib.OR.forward(true, true))
+print('train 1:',NeuralNetworkLib.getLayer(1)  )
+print('train 2:',NeuralNetworkLib.getLayer(2)  )
 logicGatesLib.OR.set()
+print('test 1:',NeuralNetworkLib.getLayer(1)  )
 print('true and false should be 1. calculated be setted w parameters: ',logicGatesLib.OR.forward(true, false))
 
 logicGatesLib.NOT.train()
-print('not result:')
+print('NOT result:')
 print('true should be 0: ',logicGatesLib.NOT.forward(false))
 print('false should be 1: ',logicGatesLib.NOT.forward(true))
+print('train 1:',NeuralNetworkLib.getLayer(1)  )
 logicGatesLib.NOT.set()
+print('test 1:',NeuralNetworkLib.getLayer(1)  )
 print('true should be 0. false should be 1 calculated be setted w parameters: ',logicGatesLib.NOT.forward(true),logicGatesLib.NOT.forward(false))
 
 logicGatesLib.XOR.train()
-print('xor result:')
+print('XOR result:')
 print('false and false should be 0: ',logicGatesLib.XOR.forward(false, false))
 print('false and true should be 1: ',logicGatesLib.XOR.forward(false, true))
 print('true and false should be 1: ',logicGatesLib.XOR.forward(true, false))
 print('true and true should be 0: ',logicGatesLib.XOR.forward(true, true))
+print('train 1:',NeuralNetworkLib.getLayer(1)  )
+print('train 2:',NeuralNetworkLib.getLayer(2)  )
 logicGatesLib.XOR.set()
 print('true and false should be 1. calculated be setted w parameters: ',logicGatesLib.XOR.forward(true, false))
---]]
 
---  test with MNIST
+
 
