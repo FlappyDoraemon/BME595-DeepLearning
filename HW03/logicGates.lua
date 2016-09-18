@@ -6,7 +6,8 @@ logicGates.NOT = {}
 logicGates.XOR = {} 
 
 function logicGates.AND.train()
-    NeuralNetworkLib.build({2,2,1})
+    NeuralNetworkLib.build({2,1})
+    --  NeuralNetworkLib.build({2,2,1})
     local i
     for i = 1 , 250 do
         -- 1,1 => 1
@@ -47,7 +48,8 @@ function logicGates.AND.set()
 end
 
 function logicGates.OR.train()
-    NeuralNetworkLib.build({2,2,1})
+    NeuralNetworkLib.build({2,1})
+    -- NeuralNetworkLib.build({2,2,1})
     local i
     for i = 1 , 250 do
         -- 1,1 => 1
