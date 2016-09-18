@@ -137,6 +137,8 @@ According to sequential logic, a⊕b = (¬a ∧ b) ∨ (a ∧¬b), so the XOR se
 Train 100 examples in train set and get the test accuracy rate of 42%, but this takes too much time becaus it doesn't use batch train technique.
 
 After using  BATCH-TRAIN mode (with batch_size = 10):
+
 1) Training speed is improved 6-8 times approximately
+
 2) If ramdom test without training, accuracy rate is 10%. If train 1 batch (=10 examples) and test, the accuracy rate is 22% in test set. If train 100 batches (=100 examples), the accuracy rate is 49% in test set.
 --------------------
