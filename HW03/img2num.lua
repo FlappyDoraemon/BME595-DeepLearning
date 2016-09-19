@@ -20,7 +20,7 @@ function img2num.train()
     local j
     local batch_size = 20
     print('batch_size = ',batch_size)
-    for i = 1 , 500 do --trainset.size do
+    for i = 1 , 30 do --trainset.size do
         --if i % 100 == 0 then
         print('training the sample of ',i,'of all','500 training batches')
         local ex = trainset[(i-1)*batch_size+1]
