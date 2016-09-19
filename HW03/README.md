@@ -143,3 +143,5 @@ After using  BATCH-TRAIN mode (with batch_size = 10):
 2) If ramdom test without training, accuracy rate is 10%. If train 1 batch (=10 examples) and test, the accuracy rate is 22% in test set. If train 100 batches (=100 examples), the accuracy rate is 49% in test set.
 
 3) Update: with batch_size = 20 and batch-train iteration = 500, the program gets the accuracy rate of 76% in the test set.
+
+4) Update: I found that the previous learning rate is too slow and after improve it the 784-500-10 MNIST model can work well now.

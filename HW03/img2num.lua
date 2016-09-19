@@ -18,11 +18,12 @@ function img2num.train()
     --  local testset = mnist.testdataset()
     local i
     local j
-    local batch_size = 20
+    local batch_size = 10
     print('batch_size = ',batch_size)
-    for i = 1 , 30 do --trainset.size do
+    local traintime = 200
+    for i = 1 , traintime do --trainset.size do
         --if i % 100 == 0 then
-        print('training the sample of ',i,'of all','500 training batches')
+        print('training the sample of ',i,'of all',traintime,'training batches')
         local ex = trainset[(i-1)*batch_size+1]
         local x = nn.Reshape(784):forward(ex.x:double()) -- the input (a 28x28 ByteTensor)
         local y = ex.y -- the label (0--9)

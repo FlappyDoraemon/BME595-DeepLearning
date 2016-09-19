@@ -130,7 +130,7 @@ local function backward_init(target, output, num , totalnum)
     end
     local de_dtheta_output = {}
     for idx1 = 1 , network_depth do
-        de_dtheta_output[idx1] = de_dtheta_local[idx1] / totalnum
+        de_dtheta_output[idx1] = de_dtheta_local[idx1]
     end
     return de_dtheta_output
 end
