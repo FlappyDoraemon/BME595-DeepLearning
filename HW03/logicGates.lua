@@ -95,11 +95,11 @@ function logicGates.NOT.train()
     NeuralNetworkLib.build({1,1})
     local i
     for i = 1 , 250 do
-        -- 1 => 1
+        -- 1 => 0
         NeuralNetworkLib.forward(torch.Tensor({1,1}))
         NeuralNetworkLib.backward(torch.Tensor({0}))
         NeuralNetworkLib.updateParams(0.5)
-        -- 0 => 0
+        -- 0 => 1
         NeuralNetworkLib.forward(torch.Tensor({1,0}))
         NeuralNetworkLib.backward(torch.Tensor({1}))
         NeuralNetworkLib.updateParams(0.5)

@@ -98,8 +98,8 @@ print('true and false should be 1. calculated be setted w parameters: ',logicGat
 
 logicGatesLib.NOT.train()
 print('NOT result:')
-print('true should be 0: ',logicGatesLib.NOT.forward(false))
-print('false should be 1: ',logicGatesLib.NOT.forward(true))
+print('true should be 0: ',logicGatesLib.NOT.forward(true))
+print('false should be 1: ',logicGatesLib.NOT.forward(false))
 print('train 1:',NeuralNetworkLib.getLayer(1)  )
 logicGatesLib.NOT.set()
 print('test 1:',NeuralNetworkLib.getLayer(1)  )
