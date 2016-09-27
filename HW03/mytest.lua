@@ -8,10 +8,12 @@ require 'nn'
 -- PART 1 : MNIST TEST
 ----------------------------------------------------------------------
 
-
+timer = torch.Timer()
+timer:reset()
 
 --  test with minist dataset
 img2numLib.train()
+print(timer:time().real)
 --  local trainset = mnist.traindataset()
 local testset = mnist.testdataset()
 --  print(trainset.size) -- to retrieve the size
@@ -39,7 +41,7 @@ print('accuracy rate after training the whole train-set:',mark,'%')
 --          https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/    
 ----------------------------------------------------------------------
 
-
+--[[
 
 NeuralNetworkLib.build({2,2,2})
 local layer_temp
@@ -115,5 +117,5 @@ print('train 1:',NeuralNetworkLib.getLayer(1)  )
 print('train 2:',NeuralNetworkLib.getLayer(2)  )
 logicGatesLib.XOR.set()
 print('true and false should be 1. calculated be setted w parameters: ',logicGatesLib.XOR.forward(true, false))
-
+--]]
 

@@ -18,9 +18,11 @@ function img2num.train()
     --  local testset = mnist.testdataset()
     local i
     local j
-    local batch_size = 10
+    local batch_size = 20
     print('batch_size = ',batch_size)
-    local traintime = 200
+    local traintime = 50
+    timer = torch.Timer()
+    timer:reset()
     for i = 1 , traintime do --trainset.size do
         --if i % 100 == 0 then
         print('training the sample of ',i,'of all',traintime,'training batches')
@@ -39,7 +41,8 @@ function img2num.train()
         end
         NeuralNetworkLib.forward(torch.cat(torch.ones(1,batch_size) , x , 1))
         NeuralNetworkLib.backward(target)
-        NeuralNetworkLib.updateParams(0.05)
+        NeuralNetworkLib.updateParams(0.03)
+    print(timer:time().real)
     end
 end
 
