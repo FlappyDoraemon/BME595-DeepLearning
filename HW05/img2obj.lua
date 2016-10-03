@@ -1,6 +1,6 @@
 require 'nn'
 require 'cunn'
-require 'image'
+local image = require 'image'
 local img2obj={}
 require 'optim'
 local net
@@ -129,7 +129,7 @@ inset)
     --]]
     print(index_lenth , trainset.data:size(2),trainset.data:size(3),trainset.data:size(4),trainset.label[2] , trainset.labelCoarse[2]) 
     print('--------------------------------')
-    for s = 1 , 10 do 
+    for s = 1 , 1 do 
         print(s)
         local j = 0
         local seq = torch.randperm(index_lenth)            -- shuffle
@@ -154,22 +154,6 @@ inset)
     torch.save('c100_model.t7',net)
 end
 
-function img2obj.forwardnum(img)
-    -- local x = nn.Reshape(3*32*32):forward(img:double())
-    local input = img:float()/255.0
-    local output = net:forward(input:cuda())
-    local currentmax = output[{1}]
-    local i
-    local outputnum = 0
-    for i = 1 , 99 do
-        if output[{i+1}] > currentmax then
-            outputnum = i
-            currentmax = output[{i+1}]
-        end
-    end
-    return outputnum
-end
-
 function img2obj.forward(img)
     -- local x = nn.Reshape(3*32*32):forward(img:double())    
     local input = img:float()/255.0
@@ -185,6 +169,56 @@ function img2obj.forward(img)
     end
     local names = torch.load('c100_names.t7')
     return names.fine_label_names[outputnum]
+end
+
+function img2obj.view(img)
+    if(paths.filep("c100_model.t7")) then
+        local lenet_checkpoint=torch.load('c100_model.t7')
+	net=lenet_checkpoint
+    end
+    local input = img:float()/255.0
+    local output = net:forward(input:cuda())
+    local currentmax = output[{1}]
+    local i
+    local outputnum = 0
+    for i = 1 , 99 do
+        if output[{i+1}] > currentmax then
+            outputnum = i
+            currentmax = output[{i+1}]
+        end
+    end
+    local names = torch.load('c100_names.t7')
+    image.display{image = img,zoom=9,legend=names.fine_label_names[outputnum]}
+end
+
+
+function img2obj.cam(idx)
+    require 'camera'
+    if(paths.filep("c100_model.t7")) then
+        local lenet_checkpoint=torch.load('c100_model.t7')
+	net=lenet_checkpoint
+    end
+    local names = torch.load('c100_names.t7')
+    -- camera.testme()   -- a simple grabber+display
+    cam = image.Camera(idx)  -- create the camera grabber
+    local w
+    for i = 1 , 3000 do
+        frame = cam:forward()  -- return the next frame available
+        local temp = torch.ones(3,32,32)
+        local input = image.scale(frame:float()/255.0,32,32)
+        local output = net:forward(input:cuda())
+        local currentmax = output[{1}]
+        local i
+        local outputnum = 0
+        for j = 1 , 99 do
+            if output[{j+1}] > currentmax then
+                outputnum = j
+                currentmax = output[{j+1}]
+            end
+        end
+        w = image.display{image = frame,legend=names.fine_label_names[outputnum], win=w}
+    end
+    cam:stop() -- release the camera
 end
 
 return img2obj

@@ -46,9 +46,12 @@ end
 
 
 
-for i = 1 , 10 do
+for i = 1 , 1 do
     print('##',i,'##')
+    timer = torch.Timer()
+    timer:reset()
     img2objLib.train()
+    print(timer:time().real)
     if(not paths.filep("cifar100-train.t7")) then
         os.execute('wget -c http://www.cs.toronto.edu/~kriz/cifar-100-binary.tar.gz')
         os.execute('tar -xvf cifar-100-binary.tar.gz')
@@ -60,28 +63,11 @@ for i = 1 , 10 do
     local i
     local mark = 0
     local lenth = testset.data:size(1)
-    for i = 1 , lenth do
-        local img = testset.data[i]
-        local y = testset.label[i] -- the label (0--9)
-        local printy = img2objLib.forwardnum(img)
-        --  print(y,printy,img2objLib.forward(img))
-        if printy == y then
-            mark = mark + 1
-        end
-    end
-    print('accuracy rate on test-set:',mark*100.0/lenth,'%')
-    mark = 0
-    lenth = trainset.data:size(1)
-    for i = 1 , lenth do
-        local img = trainset.data[i]
-        local y = trainset.label[i] -- the label (0--9)
-        local printy = img2objLib.forwardnum(img)
-        --  print(y,printy,img2objLib.forward(img))
-        if printy == y then
-            mark = mark + 1
-        end
-    end
-    print('accuracy rate one train-set:',mark*100.0/lenth,'%')
+    -- image.display{image = testset.data[1],zoom = 5}
+
+    img2objLib.view(trainset.data[2])
+    img2objLib.cam(0)
+
 end
 
 

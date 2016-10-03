@@ -67,7 +67,7 @@ function img2num.train()
             end
         end
     end
-    torch.save('lenet_checkpoint.t7',net)
+    torch.save('lenet_model.t7',net)
 end
 
 function img2num.forward(img)
