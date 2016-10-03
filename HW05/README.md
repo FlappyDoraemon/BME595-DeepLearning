@@ -9,15 +9,15 @@
         net = nn.Sequential()
         net:add(nn.Reshape(3, 32, 32))  
                                                                     -------------------------------------
-        net:add(nn.SpatialConvolutionMM(3, 100, 5, 5, 1, 1, 0, 0))  --  #kernel = 78  edge = 32 - 5 + 1 = 28
+        net:add(nn.SpatialConvolutionMM(3, 100, 5, 5, 1, 1, 0, 0))  --  #kernel = 100  edge = 32 - 5 + 1 = 28
         
         net:add(nn.ReLU())
         net:add(nn.SpatialMaxPooling(2, 2 , 2, 2, 0, 0))            -- edge = 28 / 2 = 14
                                                                     --------------------------------------
-        net:add(nn.SpatialConvolutionMM(100, 200, 4, 4, 1, 1, 0, 0))  -- #channel = 78  #kernel = 178
+        net:add(nn.SpatialConvolutionMM(100, 200, 4, 4, 1, 1, 0, 0))  -- #channel = 100  #kernel = 200
         net:add(nn.ReLU())
                                                                     ---------------------------------------
-        net:add(nn.SpatialConvolutionMM(200, 90, 3, 3, 1, 1, 0, 0)) -- #channel =178  #kernel = 90 edge =8
+        net:add(nn.SpatialConvolutionMM(200, 90, 3, 3, 1, 1, 0, 0)) -- #channel =200  #kernel = 90 edge =8
         net:add(nn.ReLU())
         net:add(nn.SpatialMaxPooling(2, 2 , 2, 2, 0, 0))            -- edge = 8 / 2 = 4
                                                                     -----------------------------------
